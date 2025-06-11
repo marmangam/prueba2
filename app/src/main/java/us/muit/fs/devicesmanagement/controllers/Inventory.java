@@ -123,7 +123,7 @@ public class Inventory implements InventoryManager {
 			String newIp = conf.getIpAddress();
 			if (newIp != null && !newIp.equals("")) {
 				for (Device other : devices.values()) {
-					if (!other.getId().equals(device.getId()) && newIp.equals(other.getNetworkConf().getMacAddress())) {
+					if (!other.getId().equals(device.getId()) && newIp.equals(other.getNetworkConf().getIpAddress())) {
 						throw new DuplicateIpAddressException(newIp);
 					}
 				}
@@ -131,6 +131,7 @@ public class Inventory implements InventoryManager {
 		}
 
 		devices.put(device.getId(), device);
+		persistence.save(devices);
 	
 	}
 
