@@ -1,0 +1,22 @@
+name: Pipeline Verificacion
+
+on:
+  workflow_dispatch:  # Permite ejecución manual
+
+jobs:
+  VerificarCodigo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonando el repositorio y estableciendo el espacio de trabajo
+        uses: actions/checkout@v3
+
+      - name: Configurando Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '16'
+
+      - name: Ejecutando los tests
+        run: |
+          chmod +x gradlew
+          ./gradlew test
